@@ -1,11 +1,11 @@
 from django.shortcuts import render
 
-# Create your views here.
 def show_main(request):
     context = {
-        'npm' : '2406431391',
-        'name': 'Muhammad Alfa Mubarok',
-        'class': 'PBP D'
+        'app_name': 'PlayMax',
+        'name': 'Muhammad Alfa Mubarok',   
+        'class': 'Kelas PBP D'     
     }
 
+    # Me-render template main.html dengan data dari context
     return render(request, "main.html", context)
