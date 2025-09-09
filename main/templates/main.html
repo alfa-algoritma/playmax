@@ -1,9 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><title>{{ app_name }}</title></head>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ app_name }}</title>
+</head>
 <body>
     <h1>Toko Sepatu {{ app_name }}</h1>
     <p><strong>Nama:</strong> {{ name }}</p>
     <p><strong>Kelas:</strong> {{ class }}</p>
+
+    <hr>
+
+    <h2>Daftar Produk</h2>
+
+    {% for product in products %}
+        <div>
+            <img src="{{ product.thumbnail }}" alt="{{ product.name }}" width="200">
+            <h3>{{ product.name }}</h3>
+            <p><strong>Kategori:</strong> {{ product.category }}</p>
+            <p><strong>Harga:</strong> Rp {{ product.price }}</p>
+            <p><strong>Deskripsi:</strong> {{ product.description }}</p>
+        </div>
+        <hr>
+    {% endfor %}
+
 </body>
 </html>
