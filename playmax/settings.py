@@ -29,8 +29,7 @@ SECRET_KEY = 'django-insecure-h)25jaea^wxso%27dss8m+w()$&%bdtft$rftt_ii(e57eqt=e
 PRODUCTION = os.getenv('PRODUCTION', 'False').lower() == 'true'
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "https://pbp.cs.ui.ac.id/muhammad.alfa41/playmax"]
-
+ALLOWED_HOSTS = ['muhammad-alfa41-playmax.pbp.cs.ui.ac.id', '127.0.0.1', 'localhost']
 
 # Application definition
 
