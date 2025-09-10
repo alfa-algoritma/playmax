@@ -7,9 +7,15 @@
 <body>
     <h1>Welcome, {{ name }} to PlayMax Sport Station</h1>
 
+    <!-- Informasi Mahasiswa dari views.py -->
+    <p><strong>Name:</strong> {{ name }}</p>
+    <p><strong>NPM:</strong> {{ npm }}</p>
+    <p><strong>Class:</strong> {{ class }}</p>
+
     <hr>
 
-    <h2>Daftar Produk</h2>
+    <!-- Judul Katalog Produk -->
+    <h2>Product Catalogue</h2>
 
     {% for product in products %}
         <div>
