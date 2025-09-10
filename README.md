@@ -40,7 +40,6 @@ Proyek `PlayMax` diimplementasikan dengan mengikuti alur arsitektur MVT pada Dja
 ### 2. Bagan *request-response* dan kaitan MVT.
 ## Bagan 
 
-```mermaid
 graph TD
     subgraph Alur Proses Request dan Response pada Django (MVT)
         A[Browser/Client] -->|HTTP Request| B(Django Server)
@@ -78,7 +77,6 @@ graph TD
     class G database
     class I,H template
     class J response
-```
 
 Alur *request-response* pada Django mengikuti arsitektur Model-View-Template (MVT) yang memisahkan antara data, logika, dan tampilan.
 
