@@ -73,6 +73,7 @@ graph TD
     class G database
     class H template
     class I response
+```
 
 
 Alur *request-response* pada Django mengikuti arsitektur Model-View-Template (MVT) yang memisahkan antara data, logika, dan tampilan.
