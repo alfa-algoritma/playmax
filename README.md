@@ -38,6 +38,47 @@ Proyek `PlayMax` diimplementasikan dengan mengikuti alur arsitektur MVT pada Dja
 8.  **Deployment**: Semua perubahan kode di-*push* ke repositori PWS. Karena database produksi terpisah, `superuser` baru dibuat di server PWS melalui *console*, dan data produk dimasukkan kembali melalui halaman admin situs yang sudah *live*.
 
 ### 2. Bagan *request-response* dan kaitan MVT.
+## Bagan 
+
+```mermaid
+graph TD
+    subgraph Alur Proses Request dan Response pada Django (MVT)
+        A[Browser/Client] -->|HTTP Request| B(Django Server)
+        B --> C{settings.py <br> Konfigurasi}
+        B --> D{urls.py <br> URL Routing}
+        D --> E{views.py <br> Business Logic}
+        E --> F[models.py <br> ORM Layer]
+        F --> G[(Database)]
+        E --> H{Context Data}
+        H --> I[Template <br> .html]
+        I --> J{Rendered <br> Response}
+        J --> B
+        B -->|HTTP Response| A
+    end
+
+    %% Styling
+    classDef client fill:#3F92E4,stroke:#fff,stroke-width:2px,color:#fff
+    classDef server fill:#FFBF46,stroke:#333,stroke-width:2px,color:#333
+    classDef config fill:#E456E5,stroke:#333,stroke-width:2px,color:#fff
+    classDef routing fill:#A0E8A2,stroke:#333,stroke-width:2px,color:#333
+    classDef logic fill:#FF8080,stroke:#333,stroke-width:2px,color:#fff
+    classDef data fill:#F8D568,stroke:#333,stroke-width:2px,color:#333
+    classDef database fill:#B4E9E2,stroke:#333,stroke-width:2px,color:#333
+    classDef template fill:#9F9F9F,stroke:#333,stroke-width:2px,color:#fff
+    classDef response fill:#D3D3D3,stroke:#333,stroke-width:2px,color:#fff
+
+
+    class A client
+    class B server
+    class C,D,E,F,G,H,I,J default
+    class C config
+    class D routing
+    class E logic
+    class F data
+    class G database
+    class I,H template
+    class J response
+```
 
 Alur *request-response* pada Django mengikuti arsitektur Model-View-Template (MVT) yang memisahkan antara data, logika, dan tampilan.
 
@@ -83,4 +124,4 @@ Menurut saya, Django adalah pilihan yang sangat baik untuk memulai pembelajaran 
 
 ### 6. Feedback untuk asisten dosen tutorial 1.
 
-Untuk Feedback tersendiri 
+Untuk Feedback tersendiri saya cukup senang dengan kinerja para kakak-kakak asdos yang dimana sangat mau membantu adik tingkatnya yang mungkin kesusahan dalam memahami cara kerja Django, terima kasih kakak-kakak asdos dan semangat juga kuliahnya!
