@@ -42,43 +42,38 @@ Proyek `PlayMax` diimplementasikan dengan mengikuti alur arsitektur MVT pada Dja
 
 ```mermaid
 graph TD
-    subgraph Alur Proses Request dan Response pada Django (MVT)
-        A["Browser/Client"] -->|HTTP Request| B("Django Server")
-        B --> C{"settings.py <br> Konfigurasi"}
-        B --> D{"urls.py <br> URL Routing"}
-        D --> E{"views.py <br> Business Logic"}
-        E --> F["models.py <br> ORM Layer"]
-        F --> G[("Database")]
-        E --> H{"Context Data"}
-        H --> I["Template <br> .html"]
-        I --> J{"Rendered <br> Response"}
-        J --> B
-        B -->|HTTP Response| A
-    end
+    A[Browser/Client] -->|HTTP Request| B[Django Server]
+    B --> C[settings.py<br/>Konfigurasi]
+    C --> D[urls.py<br/>URL Routing]
+    D --> E[views.py<br/>Business Logic]
+    E -->|Query Data| F[models.py<br/>ORM Layer]
+    F -->|SQL Operations| G[(Database)]
+    E -->|Context Data| H[templates/<br/>HTML Files]
+    H --> I[Rendered<br/>Response]
+    I --> B
+    B -->|HTTP Response| A
 
     %% Styling
-    classDef client fill:#3F92E4,stroke:#fff,stroke-width:2px,color:#fff
-    classDef server fill:#FFBF46,stroke:#333,stroke-width:2px,color:#333
-    classDef config fill:#E456E5,stroke:#333,stroke-width:2px,color:#fff
-    classDef routing fill:#A0E8A2,stroke:#333,stroke-width:2px,color:#333
-    classDef logic fill:#FF8080,stroke:#333,stroke-width:2px,color:#fff
-    classDef data fill:#F8D568,stroke:#333,stroke-width:2px,color:#333
-    classDef database fill:#B4E9E2,stroke:#333,stroke-width:2px,color:#333
-    classDef template fill:#9F9F9F,stroke:#333,stroke-width:2px,color:#fff
-    classDef response fill:#D3D3D3,stroke:#333,stroke-width:2px,color:#fff
-
+    classDef client fill:#e3f2fd,stroke:#1976d2,stroke-width:3px,color:#000
+    classDef server fill:#ffe3e0,stroke:#f57c00,stroke-width:2px,color:#000
+    classDef config fill:#e3f5f5,stroke:#7fb1a2,stroke-width:2px,color:#000
+    classDef routing fill:#e8f5e8,stroke:#388e3c,stroke-width:2px,color:#000
+    classDef logic fill:#fce4ec,stroke:#c2185b,stroke-width:2px,color:#000
+    classDef data fill:#fff1eb,stroke:#ffa000,stroke-width:2px,color:#000
+    classDef database fill:#e0f2f1,stroke:#00796b,stroke-width:2px,color:#000
+    classDef template fill:#fff8e9,stroke:#689f38,stroke-width:2px,color:#000
+    classDef response fill:#ede7f6,stroke:#512da8,stroke-width:2px,color:#000
 
     class A client
     class B server
-    class C,D,E,F,G,H,I,J default
     class C config
     class D routing
     class E logic
     class F data
     class G database
-    class I,H template
-    class J response
-```
+    class H template
+    class I response
+
 
 Alur *request-response* pada Django mengikuti arsitektur Model-View-Template (MVT) yang memisahkan antara data, logika, dan tampilan.
 
