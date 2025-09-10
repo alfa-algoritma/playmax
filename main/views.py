@@ -4,6 +4,7 @@ def show_main(request):
     context = {
         'app_name': 'PlayMax Sport Station',
         'name': 'Muhammad Alfa Mubarok',
+        'npm': '2406431391',
         'class': 'PBP D',
         'product_name': 'Adidas Adizero Evo SL',
         'product_price': 2600000,
