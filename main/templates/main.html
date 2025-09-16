@@ -2,31 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PlayMax Sport Station</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayMax Store</title>
+    <style>
+        .product-card { border: 1px solid #ccc; padding: 16px; margin: 16px; width: 300px; display: inline-block; vertical-align: top; }
+        .product-card img { max-width: 100%; height: auto; }
+    </style>
 </head>
 <body>
-    <h1>Welcome, {{ name }} to PlayMax Sport Station</h1>
+    <h1>Welcome to {{ app_name }}!</h1>
+    <h5>Name: {{ name }}</h5>
+    <h5>NPM: {{ npm }}</h5>
+    <h5>Class: {{ class }}</h5>
 
-    <!-- Informasi Mahasiswa dari views.py -->
-    <p><strong>Name:</strong> {{ name }}</p>
-    <p><strong>NPM:</strong> {{ npm }}</p>
-    <p><strong>Class:</strong> {{ class }}</p>
-
-    <hr>
-
-    <!-- Judul Katalog Produk -->
-    <h2>Product Catalogue</h2>
+    <a href="{% url 'main:create_product' %}">
+        <button>+ Add New Product</button>
+    </a>
+    <hr/>
 
     {% for product in products %}
-        <div>
-            <img src="{{ product.thumbnail }}" alt="{{ product.name }}" width="200">
-            <h3>{{ product.name }}</h3>
-            <p><strong>Kategori:</strong> {{ product.category }}</p>
-            <p><strong>Harga:</strong> Rp {{ product.price }}</p>
-            <p><strong>Deskripsi:</strong> {{ product.description }}</p>
+        <div class="product-card">
+            <img src="{{ product.thumbnail }}" alt="{{ product.name }}">
+            <h2>{{ product.name }}</h2>
+            <p><strong>Category:</strong> {{ product.category }}</p>
+            <p><strong>Price:</strong> {{ product.price }}</p>
+            <p><strong>Stock:</strong> {{ product.stock }}</p>
+            <p>{{ product.description }}</p>
         </div>
-        <hr>
     {% endfor %}
-
 </body>
 </html>
