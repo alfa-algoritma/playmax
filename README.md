@@ -65,17 +65,17 @@ Berikut adalah langkah-langkah implementasi yang saya lakukan untuk Tugas 3:
 
 ### Screenshot Akses URL Menggunakan Postman
 
-**Contoh Akses `.../json/`:**
-![Contoh JSON](URL_JSON)
+**Contoh Akses `http://127.0.0.1:8000/xml/`:**
+![Contoh XML](![alt text](image.png)
 
-**Contoh Akses `.../xml/`:**
-![Contoh XML](URL_XML)
+**Contoh Akses `http://127.0.0.1:8000/json/`:**
+![Contoh JSON](![alt text](image-1.png))
 
-**Contoh Akses `.../json/1/`:**
-![Contoh JSON by ID](URL_JSON_BY_ID)
+**Contoh Akses `http://127.0.0.1:8000/xml/1/`:**
+![Contoh XML by ID](![alt text](image-2.png))
 
-**Contoh Akses `.../xml/1/`:**
-![Contoh XML by ID](URL_XML_BY_ID)
+**Contoh Akses `http://127.0.0.1:8000/json/1/`:**
+![Contoh JSON by ID](![alt text](image-3.png))
 
 
 ### Feedback untuk Asisten Dosen Tutorial 2
