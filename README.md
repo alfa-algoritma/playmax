@@ -205,3 +205,7 @@ Berikut adalah langkah-langkah implementasi yang saya lakukan untuk Tugas 3:
 ### Feedback untuk Asisten Dosen Tutorial 2
 
 Untuk Feedback tersendiri saya sangat senang dengan kinerja para kakak-kakak asdos yang dimana mau membantu adik tingkatnya yang mungkin kesusahan dalam memahami cara kerja Django dan juga mungkin mau ditanya-tanya beberapa hal diluar tugas yang menambah wawasan baru saya dalam perkuliahan, terima kasih kakak-kakak asdos dan semangat juga kuliahnya!
+
+
+
+
