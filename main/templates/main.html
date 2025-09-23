@@ -18,6 +18,11 @@
     <a href="{% url 'main:create_product' %}">
         <button>+ Add New Product</button>
     </a>
+    <a href="{% url 'main:logout' %}">
+        <button>Logout</button>
+    </a>
+
+    <h5>Waktu login terakhir: {{ last_login }}</h5>
     <hr/>
 
     {% for product in products %}
