@@ -1,39 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlayMax Store</title>
-    <style>
-        .product-card { border: 1px solid #ccc; padding: 16px; margin: 16px; width: 300px; display: inline-block; vertical-align: top; }
-        .product-card img { max-width: 100%; height: auto; }
-    </style>
-</head>
-<body>
-    <h1>Welcome to {{ app_name }}!</h1>
-    <h5>Name: {{ name }}</h5>
-    <h5>NPM: {{ npm }}</h5>
-    <h5>Class: {{ class }}</h5>
+{% extends 'base.html' %}
 
-    <a href="{% url 'main:create_product' %}">
-        <button>+ Add New Product</button>
-    </a>
-    <a href="{% url 'main:logout' %}">
-        <button>Logout</button>
-    </a>
+{% block content %}
+<style> body { background-color: #fdf2f2; } </style>
+{% include 'navbar.html' %}
 
-    <h5>Waktu login terakhir: {{ last_login }}</h5>
-    <hr/>
+<div class="container mx-auto mt-8 px-4">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-stone-800">My Products</h1>
+        <a href="{% url 'main:create_product' %}" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded transition duration-300">
+            + Add New Product
+        </a>
+    </div>
 
-    {% for product in products %}
-        <div class="product-card">
-            <img src="{{ product.thumbnail }}" alt="{{ product.name }}">
-            <h2>{{ product.name }}</h2>
-            <p><strong>Category:</strong> {{ product.category }}</p>
-            <p><strong>Price:</strong> {{ product.price }}</p>
-            <p><strong>Stock:</strong> {{ product.stock }}</p>
-            <p>{{ product.description }}</p>
-        </div>
-    {% endfor %}
-</body>
-</html>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for product in products %}
+            <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-all duration-300">
+                <img src="{{ product.thumbnail }}" alt="{{ product.name }}" class="w-full h-56 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold text-xl mb-2 text-stone-800">{{ product.name }}</h3>
+                    <p class="text-gray-700 text-base mb-2">Price: {{ product.price }}</p>
+                    <p class="text-gray-600 text-sm mb-4">{{ product.description }}</p>
+                    <div class="flex justify-between items-center mt-4 border-t pt-4">
+                        <a href="{% url 'main:edit_product' product.id %}" class="text-sm font-medium text-stone-600 hover:text-pink-600">Edit</a>
+                        <a href="{% url 'main:delete_product' product.id %}" class="text-sm font-medium text-red-500 hover:text-red-700">Delete</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-span-3 text-center py-10 bg-white rounded-lg shadow-md">
+                <img src="https://i.ibb.co/L0w0w5p/empty-box.png" alt="No products" class="mx-auto w-48 h-48 mb-4">
+                <h3 class="text-xl font-semibold text-gray-700">Belum ada produk.</h3>
+                <p class="text-gray-500">Ayo tambahkan produk pertamamu!</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

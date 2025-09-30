@@ -72,6 +72,24 @@ def logout_user(request):
     messages.info(request, "Anda berhasil logout.")
     return response
 
+@login_required(login_url='/login/')
+def edit_product(request, id):
+    product = Product.objects.get(pk = id)
+    form = ProductForm(request.POST or None, instance=product)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_product.html", context)
+
+@login_required(login_url='/login/')
+def delete_product(request, id):
+    product = Product.objects.get(pk = id)
+    product.delete()
+    return HttpResponseRedirect(reverse('main:show_main'))
+
 def show_xml(request):
     data = Product.objects.all()
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")

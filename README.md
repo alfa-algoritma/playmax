@@ -301,3 +301,96 @@ Berikut adalah langkah-langkah implementasi yang saya lakukan untuk Tugas 4:
 7.  **Membuat Data Dummy**: Terakhir, saya membuat dua akun pengguna melalui halaman registrasi, lalu login dengan masing-masing akun untuk menambahkan tiga data produk yang berbeda, memastikan setiap akun hanya bisa melihat datanya sendiri.
 
 ---
+
+# Proyek PlayMax - Tugas 5 Pemrograman Berbasis Platform
+
+Ini adalah implementasi proyek untuk Tugas 5, yang kini dilengkapi dengan fitur styling, edit, dan delete.
+
+**Nama**: Muhammad Alfa Mubarok
+**NPM**: 2406431391
+**Kelas**: PBP D
+
+---
+
+# Tautan Aplikasi PWS
+
+Aplikasi dapat diakses melalui tautan berikut:
+[https://muhammad-alfa41-playmax.pbp.cs.ui.ac.id/](https://muhammad-alfa41-playmax.pbp.cs.ui.ac.id/)
+
+---
+# Jawaban Pertanyaan Tugas 5
+
+### 1. Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+
+Urutan prioritas pengambilan CSS selector ditentukan oleh **spesifisitas** (*specificity*). Semakin spesifik sebuah selector, semakin tinggi prioritasnya. Jika ada dua aturan dengan spesifisitas yang sama, maka aturan yang didefinisikan terakhir di file CSS yang akan digunakan.
+
+Urutan prioritas dari yang tertinggi ke terendah adalah:
+1.  **Inline Styles**: Aturan CSS yang ditulis langsung pada atribut `style` di elemen HTML (contoh: `<p style="color: red;">`).
+2.  **ID Selector**: Selector yang menargetkan ID unik (contoh: `#header`).
+3.  **Class, Attribute, dan Pseudo-class Selectors**: Selector yang menargetkan kelas (contoh: `.card`), atribut (contoh: `[type="text"]`), atau *pseudo-class* (contoh: `:hover`).
+4.  **Element dan Pseudo-element Selectors**: Selector yang menargetkan nama tag HTML (contoh: `p`, `div`) atau *pseudo-element* (contoh: `::before`).
+
+### 2. Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web?
+
+**Responsive design** penting karena pengguna mengakses web dari berbagai macam perangkat dengan ukuran layar yang sangat beragam (ponsel, tablet, laptop, desktop). Tanpa desain yang responsif, sebuah situs web yang terlihat bagus di desktop bisa menjadi sangat sulit digunakan di ponsel (teks terlalu kecil, elemen tumpang tindih, atau harus sering *zoom* dan *scroll* horizontal).
+
+Tujuan utamanya adalah untuk memberikan **pengalaman pengguna (UX) yang optimal** di semua perangkat, memastikan konten mudah dibaca dan navigasi tetap intuitif tanpa memandang ukuran layar.
+
+* **Contoh Aplikasi yang Menerapkan Responsive Design**: Hampir semua situs web modern, seperti **Tokopedia**. Jika Anda membuka situs Tokopedia di desktop, Anda akan melihat layout multi-kolom dengan banyak informasi. Jika Anda membukanya di ponsel (atau menyempitkan jendela browser), layout akan berubah menjadi satu kolom, gambar-gambar menjadi lebih besar, dan navigasi disederhanakan menjadi ikon dan menu *hamburger*.
+* **Contoh Aplikasi yang Belum Menerapkan**: Situs-situs web lama atau internal yang dibuat sebelum era *mobile-first*. Tampilannya akan persis sama di ponsel seperti di desktop, hanya saja diperkecil, sehingga pengguna harus melakukan *zoom* manual untuk membaca atau mengklik sesuatu.
+
+### 3. Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+
+Ketiga properti ini adalah bagian fundamental dari **CSS Box Model**, yang mendefinisikan ruang di sekitar elemen HTML.
+
+* **Padding**: Ruang transparan di **dalam** *border*, antara *border* dan konten elemen itu sendiri. Fungsinya adalah untuk memberikan "ruang bernapas" bagi konten.
+* **Border**: Garis yang mengelilingi *padding* dan konten. *Border* memiliki ketebalan, gaya (misalnya, *solid*, *dotted*), dan warna.
+* **Margin**: Ruang transparan di **luar** *border*. Fungsinya adalah untuk memberikan jarak antara elemen tersebut dengan elemen lain di sekitarnya.
+
+**Cara Implementasi (CSS):**
+```css
+.my-element {
+    /* Padding: 10px di semua sisi */
+    padding: 10px;
+
+    /* Border: 2px, solid, warna hitam */
+    border: 2px solid black;
+
+    /* Margin: 15px di semua sisi */
+    margin: 15px;
+}
+```
+Ketiganya juga bisa diatur per sisi (misalnya, `padding-top`, `margin-left`, `border-bottom-width`).
+
+### 4. Jelaskan konsep flexbox dan grid layout beserta kegunaannya!
+
+**Flexbox** dan **Grid** adalah dua modul *layout* modern di CSS yang digunakan untuk mengatur posisi dan penataan elemen secara efisien dan responsif.
+
+* **Flexbox (Flexible Box Layout):**
+    * **Konsep**: Model *layout* satu dimensi. Ia sangat baik dalam menata item dalam satu baris (horizontal) atau satu kolom (vertikal).
+    * **Kegunaan**: Sempurna untuk komponen skala kecil, seperti menata item di dalam *navbar* (logo di kiri, link di tengah, tombol di kanan), menyusun tombol-tombol di dalam sebuah *card* secara sejajar, atau membuat elemen berada di tengah-tengah secara vertikal dan horizontal.
+
+* **Grid Layout:**
+    * **Konsep**: Model *layout* dua dimensi. Ia dirancang untuk menata elemen dalam baris **dan** kolom secara bersamaan, seperti tabel atau tata letak majalah.
+    * **Kegunaan**: Ideal untuk *layout* halaman utama atau skala besar. Contohnya, membuat galeri foto dengan 3 kolom dan beberapa baris, menata *sidebar* di samping konten utama, atau membuat tata letak halaman yang kompleks yang membutuhkan kontrol presisi atas posisi elemen di kedua sumbu.
+
+Singkatnya, **gunakan Flexbox untuk menata item dalam satu garis, gunakan Grid untuk menata keseluruhan layout halaman.**
+
+### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step!
+
+Berikut adalah langkah-langkah implementasi yang saya lakukan untuk Tugas 5:
+
+1.  **Implementasi Edit dan Delete**:
+    * Saya menambahkan dua fungsi baru, `edit_product` dan `delete_product`, di `main/views.py`. Fungsi `edit_product` mengambil data produk yang ada untuk diisi ke dalam `ProductForm`, sedangkan `delete_product` langsung menghapus objek dari database.
+    * Saya membuat template baru `edit_product.html` untuk menampilkan form edit.
+    * Terakhir, saya mendaftarkan URL `/edit-product/<int:id>` dan `/delete/<int:id>` di `main/urls.py` dan menambahkan tombol *link* ke URL tersebut di setiap kartu produk pada `main.html`.
+2.  **Kustomisasi Desain**:
+    * Saya memilih tema **pink-cokelat** dengan Tailwind CSS. Untuk halaman **login**, saya menggunakan latar belakang pink muda (`#fdf2f2`) dan tombol serta link berwarna pink tua (`pink-600`), menciptakan tampilan yang lembut dan modern.
+    * Untuk halaman **utama**, saya mengimplementasikan kartu produk dengan *shadow* dan efek *hover* untuk memberikan kesan interaktif.
+3.  **Membuat Navbar Responsif**:
+    * Saya membuat file `templates/navbar.html` baru. Di dalamnya, saya menggunakan kelas utilitas Tailwind CSS untuk membuat dua versi *layout*: satu untuk desktop (menggunakan `hidden md:flex`) dan satu untuk mobile (menggunakan `md:hidden`).
+    * Saya menambahkan tombol *hamburger* yang hanya muncul di layar kecil.
+    * Saya menulis sedikit kode JavaScript untuk menambahkan fungsionalitas *toggle* (sembunyikan/tampilkan) pada menu *mobile* saat tombol *hamburger* diklik.
+    * Terakhir, saya menggunakan `{% include 'navbar.html' %}` di `base.html` atau `main.html` agar *navbar* muncul di semua halaman.
+
+---
