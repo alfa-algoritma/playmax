@@ -4,11 +4,13 @@
             <div class="flex items-center py-4 px-2">
                 <a href="{% url 'main:show_main' %}" class="font-bold text-2xl text-pink-400">PlayMax Store</a>
             </div>
+
             <div class="hidden md:flex items-center space-x-3">
                 <a href="{% url 'main:show_main' %}" class="py-2 px-2 font-medium hover:text-pink-400 transition duration-300">Home</a>
                 <a href="#" class="py-2 px-2 font-medium hover:text-pink-400 transition duration-300">Shoes</a>
                 <a href="#" class="py-2 px-2 font-medium hover:text-pink-400 transition duration-300">Apparel</a>
             </div>
+
             <div class="hidden md:flex items-center space-x-3">
                 {% if user.is_authenticated %}
                     <span class="py-2 px-2 font-medium">Hi, {{ user.username }}!</span>
@@ -18,6 +20,7 @@
                     <a href="{% url 'main:register' %}" class="py-2 px-3 bg-pink-500 hover:bg-pink-600 text-white font-semibold rounded-lg shadow-md transition duration-300">Register</a>
                 {% endif %}
             </div>
+
             <div class="md:hidden flex items-center">
                 <button class="outline-none mobile-menu-button">
                     <svg class="w-6 h-6 text-gray-200 hover:text-pink-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -27,6 +30,7 @@
             </div>
         </div>
     </div>
+
     <div class="hidden mobile-menu">
         <ul class="">
             <li><a href="{% url 'main:show_main' %}" class="block text-sm px-2 py-4 hover:bg-pink-500 transition duration-300">Home</a></li>
@@ -41,11 +45,15 @@
             {% endif %}
         </ul>
     </div>
+
     <script>
+        // Ambil elemen tombol dan menu
         const btn = document.querySelector("button.mobile-menu-button");
         const menu = document.querySelector(".mobile-menu");
+
+        // Tambahkan event listener untuk toggle menu
         btn.addEventListener("click", () => {
             menu.classList.toggle("hidden");
         });
     </script>
-</nav>  
+</nav>

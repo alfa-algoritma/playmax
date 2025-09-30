@@ -1,18 +1,62 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style> body { background-color: #fdf2f2; } </style>
 {% include 'navbar.html' %}
-<div class="container mx-auto mt-10 px-4">
-    <h1 class="text-3xl font-bold mb-6 text-stone-800">Edit Product</h1>
 
-    <form method="POST" class="bg-white p-6 rounded-lg shadow-md">
+<div class="container mx-auto mt-10 px-4">
+    <h1 class="text-3xl font-bold mb-6 text-stone-800">Add New Product</h1>
+
+    <form method="POST" class="bg-white p-8 rounded-lg shadow-md max-w-2xl mx-auto">
         {% csrf_token %}
-        <div class="space-y-4">
-            {{ form.as_p }}
+        <div class="space-y-6">
+
+            <div>
+                <label for="{{ form.name.id_for_label }}" class="block text-sm font-medium text-gray-700">Name</label>
+                <div class="mt-1">
+                    {{ form.name }}
+                </div>
+            </div>
+
+            <div>
+                <label for="{{ form.price.id_for_label }}" class="block text-sm font-medium text-gray-700">Price</label>
+                <div class="mt-1">
+                    {{ form.price }}
+                </div>
+            </div>
+
+            <div>
+                <label for="{{ form.description.id_for_label }}" class="block text-sm font-medium text-gray-700">Description</label>
+                <div class="mt-1">
+                    {{ form.description }}
+                </div>
+            </div>
+
+            <div>
+                <label for="{{ form.category.id_for_label }}" class="block text-sm font-medium text-gray-700">Category</label>
+                <div class="mt-1">
+                    {{ form.category }}
+                </div>
+            </div>
+
+            <div>
+                <label for="{{ form.thumbnail.id_for_label }}" class="block text-sm font-medium text-gray-700">Thumbnail URL</label>
+                <div class="mt-1">
+                    {{ form.thumbnail }}
+                </div>
+            </div>
+
+            <div>
+                <label for="{{ form.stock.id_for_label }}" class="block text-sm font-medium text-gray-700">Stock</label>
+                <div class="mt-1">
+                    {{ form.stock }}
+                </div>
+            </div>
+
         </div>
-        <div class="mt-6">
+        <div class="mt-8">
             <button type="submit" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded transition duration-300">
-                Save Changes
+                Add Product
             </button>
             <a href="{% url 'main:show_main' %}" class="ml-4 text-gray-600 hover:text-gray-800">Cancel</a>
         </div>
