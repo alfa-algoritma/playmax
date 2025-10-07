@@ -12,16 +12,31 @@ import datetime
 
 @login_required(login_url='/login/')
 def show_main(request):
-    products = Product.objects.filter(user=request.user)
+    filter_type = request.GET.get('filter', 'all')
+
+    if filter_type == 'my':
+        products = Product.objects.filter(user=request.user)
+    else: 
+        products = Product.objects.all()
+
     context = {
         'app_name': 'PlayMax Sport Station',
         'name': request.user.username,
         'npm': '2406431391',
         'class': 'PBP D',
         'products': products,
-        'last_login': request.COOKIES.get('last_login', 'Belum pernah login')
+        'last_login': request.COOKIES.get('last_login', 'Belum pernah login'),
+        'active_filter': filter_type,
     }
     return render(request, "main.html", context)
+
+@login_required(login_url='/login/')
+def show_product(request, id):
+    product = Product.objects.get(pk=id)
+    context = {
+        'product': product
+    }
+    return render(request, "product_detail.html", context)
 
 @login_required(login_url='/login/')
 def create_product(request):
