@@ -2,26 +2,62 @@
 
 {% block content %}
 <style> body { background-color: #fdf2f2; } </style>
-{% include 'navbar.html' %}
 
-<div class="min-h-screen flex items-center justify-center py-12">
+<div class="min-h-screen flex items-center justify-center py-12 px-4">
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 class="text-3xl font-bold text-center text-stone-800 mb-2">Create Account</h2>
-        <p class="text-center text-gray-600 mb-8">Join the PlayMax Community</p>
+        <h2 class="text-3xl font-bold text-center text-pink-500 mb-2">PlayMax Store</h2>
+        <p class="text-center text-gray-600 mb-8">Create your account to start shopping!</p>
 
-        <form method="POST">
+        <form id="register_form" method="POST" class="space-y-5">
             {% csrf_token %}
-            <div class="space-y-4">
-                {{ form.as_p }}
+            <div>
+                <label for="id_username" class="block text-sm font-medium text-gray-700">Username</label>
+                <input type="text" name="username" id="id_username" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-pink-500 focus:border-pink-500" placeholder="Choose a unique username" required>
             </div>
-            <button type="submit" class="mt-6 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">
+
+            <div>
+                <label for="id_password1" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" name="password1" id="id_password1" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-pink-500 focus:border-pink-500" placeholder="Enter a strong password" required>
+            </div>
+
+            <div>
+                <label for="id_password2" class="block text-sm font-medium text-gray-700">Password confirmation</label>
+                <input type="password" name="password2" id="id_password2" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-pink-500 focus:border-pink-500" placeholder="Confirm your password" required>
+            </div>
+
+            <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-pink-600 hover:bg-pink-700">
                 Register
             </button>
         </form>
 
-        <p class="text-center text-gray-500 text-xs mt-6">
-            Sudah punya akun? <a class="text-pink-600 hover:text-pink-800" href="{% url 'main:login' %}">Login di sini</a>
+        <p class="text-center text-gray-500 text-sm mt-6">
+            Already have an account? <a class="text-pink-600 hover:text-pink-800" href="{% url 'main:login' %}">Login Now</a>
         </p>
     </div>
 </div>
+
+<script>
+    document.getElementById("register_form").addEventListener("submit", async function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        const response = await fetch("{% url 'main:register_ajax' %}", {
+            method: "POST",
+            body: formData
+        });
+        const data = await response.json();
+
+        if (data.status === "success") {
+            showToast("Success", data.message, "success");
+            setTimeout(() => { window.location.href = "{% url 'main:login' %}" }, 2000);
+        } else {
+            let errorMsg = "Registrasi Gagal:\n";
+            // Mengambil pesan error dari Django dan menampilkannya
+            const errors = JSON.parse(data.errors.password2[0].message);
+            errors.forEach(err => {
+                errorMsg += `- ${err}\n`;
+            });
+            showToast("Error", errorMsg, "error");
+        }
+    });
+</script>
 {% endblock %}

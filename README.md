@@ -15,7 +15,7 @@ Aplikasi dapat diakses melalui tautan berikut:
 
 ---
 
-# Jawaban Pertanyaan
+# Jawaban Pertanyaan Tugas 2
 
 ### 1. Jelaskan implementasi *checklist* tugas secara *step-by-step*.
 
@@ -226,6 +226,7 @@ Aplikasi dapat diakses melalui tautan berikut:
 [https://muhammad-alfa41-playmax.pbp.cs.ui.ac.id/](https://muhammad-alfa41-playmax.pbp.cs.ui.ac.id/)
 
 ---
+
 # Jawaban Pertanyaan Tugas 4
 
 ### 1. Apa itu Django Authentication Form? Jelaskan juga kelebihan dan kekurangannya.
@@ -318,6 +319,7 @@ Aplikasi dapat diakses melalui tautan berikut:
 [https://muhammad-alfa41-playmax.pbp.cs.ui.ac.id/](https://muhammad-alfa41-playmax.pbp.cs.ui.ac.id/)
 
 ---
+
 # Jawaban Pertanyaan Tugas 5
 
 ### 1. Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
@@ -392,5 +394,68 @@ Berikut adalah langkah-langkah implementasi yang saya lakukan untuk Tugas 5:
     * Saya menambahkan tombol *hamburger* yang hanya muncul di layar kecil.
     * Saya menulis sedikit kode JavaScript untuk menambahkan fungsionalitas *toggle* (sembunyikan/tampilkan) pada menu *mobile* saat tombol *hamburger* diklik.
     * Terakhir, saya menggunakan `{% include 'navbar.html' %}` di `base.html` atau `main.html` agar *navbar* muncul di semua halaman.
+
+---
+
+# Proyek PlayMax - Tugas 6 Pemrograman Berbasis Platform
+
+Ini adalah implementasi proyek untuk Tugas 6, yang kini semua fiturnya berjalan secara dinamis menggunakan JavaScript dan AJAX.
+
+**Nama**: Muhammad Alfa Mubarok
+**NPM**: 2406431391
+**Kelas**: PBP D
+
+---
+
+# Tautan Aplikasi PWS
+
+Aplikasi dapat diakses melalui tautan berikut:
+[https://muhammad-alfa41-playmax.pbp.cs.ui.ac.id/](https://muhammad-alfa41-playmax.pbp.cs.ui.ac.id/)
+
+---
+
+# Jawaban Pertanyaan Tugas 6
+
+### 1. Apa perbedaan antara *synchronous* dan *asynchronous request*?
+
+* **Synchronous Request (Sinkron)**: Ini adalah model komunikasi tradisional. Ketika *browser* mengirim *request* ke server, ia akan **berhenti dan menunggu** sampai server memberikan respons. Selama menunggu, seluruh halaman web menjadi tidak responsif (*freeze*). Pengguna tidak bisa mengklik tombol atau melakukan apapun sampai proses selesai. Ini seperti menelepon seseorang dan harus menunggu di telepon sampai mereka menjawab.
+
+* **Asynchronous Request (Asinkron/AJAX)**: Ini adalah model yang lebih modern. Ketika *browser* mengirim *request*, ia **tidak perlu menunggu**. *Browser* bisa melanjutkan tugas lain dan halaman web tetap interaktif. Ketika server selesai memproses dan mengirimkan respons, sebuah fungsi JavaScript akan dipicu untuk memperbarui bagian tertentu dari halaman. Ini seperti mengirim pesan teks; Anda bisa melakukan hal lain setelah mengirimnya dan akan mendapat notifikasi saat ada balasan.
+
+### 2. Bagaimana AJAX bekerja di Django?
+
+Alur kerja AJAX di Django adalah sebagai berikut:
+1.  **Aksi Pengguna (Client-Side)**: Pengguna melakukan aksi di halaman web (misalnya, mengklik tombol).
+2.  **JavaScript Mengirim Request**: Sebuah fungsi JavaScript (menggunakan `fetch()`) mengirimkan *request* ke URL *endpoint* khusus di Django di latar belakang. *Request* ini bisa berupa `GET` untuk meminta data atau `POST` untuk mengirim data baru.
+3.  **Django Menerima Request**: `urls.py` Django mencocokkan URL *request* dengan sebuah *view* yang telah disiapkan untuk menangani permintaan AJAX.
+4.  **View Memproses Logika**: *View* tersebut melakukan operasi yang diperlukan, seperti mengambil data dari *database* (untuk *request* `GET`) atau menyimpan data baru (untuk *request* `POST`).
+5.  **View Mengembalikan `JsonResponse`**: Alih-alih me-*render* template HTML, *view* ini akan mengembalikan data dalam format JSON menggunakan `JsonResponse`. Ini adalah respons yang ringan dan mudah diproses oleh JavaScript.
+6.  **JavaScript Menerima Respons**: Fungsi `fetch()` di *client-side* menerima data JSON tersebut.
+7.  **JavaScript Memperbarui DOM**: JavaScript kemudian memanipulasi DOM (Document Object Model) untuk memperbarui tampilan halaman web—misalnya, menambahkan kartu produk baru atau menampilkan pesan sukses—tanpa perlu me-*reload* seluruh halaman.
+
+### 3. Apa keuntungan menggunakan AJAX dibandingkan render biasa di Django?
+
+* **Pengalaman Pengguna (UX) yang Lebih Baik**: Halaman terasa lebih cepat dan responsif karena tidak perlu ada *full page reload*. Pengguna bisa terus berinteraksi dengan halaman sementara data diproses di latar belakang.
+* **Efisiensi Bandwidth**: Hanya data yang benar-benar dibutuhkan yang ditransfer antara klien dan server (dalam format JSON), bukan seluruh halaman HTML. Ini membuat transfer data lebih cepat dan hemat.
+* **Mengurangi Beban Server**: Server hanya perlu memproses dan mengirimkan data mentah, tidak perlu lagi me-*render* template HTML untuk setiap *request* kecil, sehingga mengurangi beban kerja.
+* **Interaktivitas Real-Time**: Memungkinkan pembuatan fitur-fitur yang terasa lebih modern dan interaktif, seperti *live search*, notifikasi, atau *infinite scroll*.
+
+### 4. Bagaimana cara memastikan keamanan saat menggunakan AJAX untuk fitur Login dan Register di Django?
+
+Keamanan AJAX pada dasarnya sama dengan keamanan form biasa, dengan beberapa penekanan khusus:
+1.  **Gunakan HTTPS**: Pastikan seluruh komunikasi dienkripsi menggunakan HTTPS untuk mencegah penyadapan data (termasuk username dan password) saat transit.
+2.  **Validasi di Sisi Server (Wajib)**: Jangan pernah percaya pada validasi di *client-side* (JavaScript). Semua data yang diterima dari *request* AJAX di *view* Django **harus** divalidasi ulang menggunakan *form* Django (`AuthenticationForm`, `UserCreationForm`). Ini untuk memastikan data yang masuk ke database bersih dan aman.
+3.  **Proteksi CSRF**: Untuk *request* AJAX yang mengubah data (seperti `POST`), token CSRF tetap wajib disertakan. Ini bisa dilakukan dengan mengambil token CSRF dari *cookie* menggunakan JavaScript dan menyertakannya dalam *header* `X-CSRFToken` pada *request* `fetch()`. Pada tugas ini, `@csrf_exempt` digunakan untuk penyederhanaan, tetapi di aplikasi produksi, pengiriman token via *header* adalah praktik terbaik.
+4.  **Jangan Kirim Informasi Sensitif dalam Respons**: Setelah login atau registrasi, jangan pernah mengirim kembali data sensitif seperti password dalam `JsonResponse`. Cukup kirim pesan status seperti `{"status": "success"}`.
+
+### 5. Bagaimana AJAX mempengaruhi pengalaman pengguna (User Experience) pada website?
+
+AJAX secara dramatis **meningkatkan** *User Experience* dengan membuat website terasa seperti aplikasi desktop yang cepat dan mulus:
+* **Kecepatan Persepsian**: Karena tidak ada layar putih saat halaman di-*reload*, pengguna merasa aplikasi berjalan lebih cepat.
+* **Alur Kerja yang Tidak Terputus**: Pengguna bisa melakukan aksi (seperti menambah produk) dalam sebuah *modal* tanpa kehilangan konteks halaman utama tempat mereka berada.
+* **Umpan Balik Instan**: Aksi seperti menghapus item bisa langsung terlihat hasilnya di layar, memberikan kepuasan instan kepada pengguna.
+* **Mengurangi Frustrasi**: Menghilangkan keharusan untuk menunggu *full page reload* untuk setiap aksi kecil, yang seringkali menjadi sumber frustrasi utama bagi pengguna.
+
+Secara keseluruhan, AJAX mengubah interaksi dari yang "kaku" dan berbasis halaman menjadi lebih "cair" dan dinamis.
 
 ---

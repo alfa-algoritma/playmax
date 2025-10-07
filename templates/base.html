@@ -6,8 +6,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}PlayMax{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            background-color: #fdf2f2;
+        }
+    </style>
 </head>
-<body class="bg-stone-100">
-    {% block content %}{% endblock content %}
+<body>
+
+    {% block content %}
+    {% endblock content %}
+
+    <div id="toast-component" class="fixed top-8 right-8 p-4 px-6 rounded-lg shadow-xl z-50 opacity-0 transition-all duration-500 -translate-y-full flex items-center gap-4">
+        <span id="toast-icon" class="text-2xl"></span>
+        <div>
+            <h3 class="font-bold" id="toast-title"></h3>
+            <p id="toast-message" class="text-sm"></p>
+        </div>
+    </div>
+
+    <script>
+        function showToast(title, message, type = 'info', duration = 3000) {
+            const toastComponent = document.getElementById('toast-component');
+            const toastTitle = document.getElementById('toast-title');
+            const toastMessage = document.getElementById('toast-message');
+            const toastIcon = document.getElementById('toast-icon');
+
+            if (!toastComponent || !toastIcon) return;
+
+            toastComponent.className = 'fixed top-8 right-8 p-4 px-6 rounded-lg shadow-xl z-50 opacity-0 transition-all duration-500 -translate-y-full flex items-center gap-4';
+
+            if (type === 'success') {
+                toastComponent.classList.add('bg-emerald-50', 'text-emerald-800');
+                toastComponent.style.border = '1px solid #10b981';
+                toastIcon.innerHTML = '✔️';
+            } else if (type === 'error') {
+                toastComponent.classList.add('bg-rose-50', 'text-rose-800');
+                toastComponent.style.border = '1px solid #f43f5e';
+                toastIcon.innerHTML = '❌';
+            } else {
+                toastComponent.classList.add('bg-sky-50', 'text-sky-800');
+                toastComponent.style.border = '1px solid #0ea5e9';
+                toastIcon.innerHTML = 'ℹ️';
+            }
+
+            toastTitle.textContent = title;
+            toastMessage.textContent = message;
+
+            toastComponent.classList.remove('opacity-0', '-translate-y-full');
+            toastComponent.classList.add('opacity-100', 'translate-y-0');
+
+            setTimeout(() => {
+                toastComponent.classList.remove('opacity-100', 'translate-y-0');
+                toastComponent.classList.add('opacity-0', '-translate-y-full');
+            }, duration);
+        }
+    </script>
 </body>
 </html>

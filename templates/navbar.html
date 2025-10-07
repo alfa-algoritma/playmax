@@ -1,29 +1,23 @@
 <nav class="bg-stone-800 text-white shadow-lg">
     <div class="max-w-7xl mx-auto px-4">
-        <div class="flex justify-between">
-            <div class="flex items-center py-4 px-2">
+        <div class="flex justify-between h-16">
+            <div class="flex items-center">
                 <a href="{% url 'main:show_main' %}" class="font-bold text-2xl text-pink-400">PlayMax Store</a>
             </div>
 
-            <div class="hidden md:flex items-center space-x-3">
-                <a href="{% url 'main:show_main' %}" class="py-2 px-2 font-medium hover:text-pink-400 transition duration-300">Home</a>
-                <a href="#" class="py-2 px-2 font-medium hover:text-pink-400 transition duration-300">Shoes</a>
-                <a href="#" class="py-2 px-2 font-medium hover:text-pink-400 transition duration-300">Apparel</a>
-            </div>
-
-            <div class="hidden md:flex items-center space-x-3">
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="{% url 'main:show_main' %}" class="py-2 px-2 font-medium hover:text-pink-400">Home</a>
+                <a href="#" class="py-2 px-2 font-medium hover:text-pink-400">Shoes</a>
+                <a href="#" class="py-2 px-2 font-medium hover:text-pink-400">Apparel</a>
                 {% if user.is_authenticated %}
                     <span class="py-2 px-2 font-medium">Hi, {{ user.username }}!</span>
-                    <a href="{% url 'main:logout' %}" class="py-2 px-3 bg-pink-500 hover:bg-pink-600 text-white font-semibold rounded-lg shadow-md transition duration-300">Logout</a>
-                {% else %}
-                    <a href="{% url 'main:login' %}" class="py-2 px-2 font-medium hover:text-pink-400 transition duration-300">Login</a>
-                    <a href="{% url 'main:register' %}" class="py-2 px-3 bg-pink-500 hover:bg-pink-600 text-white font-semibold rounded-lg shadow-md transition duration-300">Register</a>
+                    <a href="{% url 'main:logout' %}" class="py-2 px-3 bg-pink-500 hover:bg-pink-600 text-white rounded-lg">Logout</a>
                 {% endif %}
             </div>
 
             <div class="md:hidden flex items-center">
                 <button class="outline-none mobile-menu-button">
-                    <svg class="w-6 h-6 text-gray-200 hover:text-pink-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="w-6 h-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
@@ -32,28 +26,22 @@
     </div>
 
     <div class="hidden mobile-menu">
-        <ul class="">
-            <li><a href="{% url 'main:show_main' %}" class="block text-sm px-2 py-4 hover:bg-pink-500 transition duration-300">Home</a></li>
-            <li><a href="#" class="block text-sm px-2 py-4 hover:bg-pink-500 transition duration-300">Shoes</a></li>
-            <li><a href="#" class="block text-sm px-2 py-4 hover:bg-pink-500 transition duration-300">Apparel</a></li>
+        <ul class="py-2">
+            <li><a href="{% url 'main:show_main' %}" class="block px-4 py-3 hover:bg-pink-500">Home</a></li>
+            <li><a href="#" class="block px-4 py-3 hover:bg-pink-500">Shoes</a></li>
             {% if user.is_authenticated %}
-                <li class="px-2 py-4"><span class="font-medium">Hi, {{ user.username }}!</span></li>
-                <li><a href="{% url 'main:logout' %}" class="block text-sm px-2 py-4 text-pink-400 font-bold hover:bg-pink-500 hover:text-white transition duration-300">Logout</a></li>
-            {% else %}
-                <li><a href="{% url 'main:login' %}" class="block text-sm px-2 py-4 hover:bg-pink-500 transition duration-300">Login</a></li>
-                <li><a href="{% url 'main:register' %}" class="block text-sm px-2 py-4 hover:bg-pink-500 transition duration-300">Register</a></li>
+                <li class="px-4 py-3 font-medium">Hi, {{ user.username }}!</li>
+                <li><a href="{% url 'main:logout' %}" class="block px-4 py-3 text-pink-400 font-bold">Logout</a></li>
             {% endif %}
         </ul>
     </div>
-
-    <script>
-        // Ambil elemen tombol dan menu
-        const btn = document.querySelector("button.mobile-menu-button");
-        const menu = document.querySelector(".mobile-menu");
-
-        // Tambahkan event listener untuk toggle menu
+</nav>
+<script>
+    const btn = document.querySelector("button.mobile-menu-button");
+    const menu = document.querySelector(".mobile-menu");
+    if(btn && menu) {
         btn.addEventListener("click", () => {
             menu.classList.toggle("hidden");
         });
-    </script>
-</nav>
+    }
+</script>
