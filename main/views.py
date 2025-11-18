@@ -1,3 +1,8 @@
+import json
+from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.core import serializers
+import requests
 from django.shortcuts import render, redirect, get_object_or_404
 from main.models import Product
 from django.http import HttpResponse, JsonResponse
@@ -113,3 +118,39 @@ def show_product(request, id):
     product = get_object_or_404(Product, pk=id)
     context = {'product': product}
     return render(request, "product_detail.html", context)
+
+@csrf_exempt
+def create_product_flutter(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        
+        # Buat produk baru
+        new_product = Product.objects.create(
+            user=request.user,
+            name=data["name"],
+            price=int(data["price"]),
+            description=data["description"],
+            category=data["category"],
+            thumbnail=data["thumbnail"],
+            is_featured=data["isFeatured"]
+        )
+        
+        new_product.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
+
+# View untuk Proxy Gambar (Agar emulator bisa load gambar)
+def proxy_image(request):
+    image_url = request.GET.get('url')
+    if not image_url:
+        return HttpResponse('No URL provided', status=400)
+
+    try:
+        response = requests.get(image_url, timeout=10)
+        response.raise_for_status()
+        content_type = response.headers.get('Content-Type', 'image/jpeg')
+        return HttpResponse(response.content, content_type=content_type)
+    except Exception as e:
+        return HttpResponse(f'Error fetching image: {str(e)}', status=500)
